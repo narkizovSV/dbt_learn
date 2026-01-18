@@ -1,0 +1,30 @@
+version: 2
+
+sources:
+  - name: demo_src
+    schema: demo_src
+    database: dwh_flight
+    description: Источники из демонстрационной БД авиаперевозок
+    tables:
+      - name: aircrafts
+        description: "Справочник моделей воздушных судов: код самолёта, наименование модели и максимальная дальность полёта."
+        columns:
+          - name: aircraft_code
+            description: "Трёхзначный IATA‑код модели воздушного судна."
+          - name: model
+            description: "Наименование модели воздушного судна (в зависимости от выбранного языка локализации)."
+          - name: range
+            description: "Максимальная дальность полёта, км."
+      - name: airports
+        description: Аэропорты
+        columns:
+          - name: airport_code
+            description: Краткое наименование аэропорта
+          - name: airport_name
+            description: Наименвоание аэропорта
+          - name: city
+            description: Местоположение аэропорта
+          - name: coordinates
+            description: Месторасположение аэропорта
+          - name: timezone
+            description: Часовая зона

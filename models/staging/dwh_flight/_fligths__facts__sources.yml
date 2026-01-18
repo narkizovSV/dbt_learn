@@ -1,0 +1,76 @@
+version: 2
+
+sources:
+  - name: demo_src_practics
+    schema: demo_src
+    database: dwh_flight
+    description: Домашняя работа
+    tables:
+      - name: boarding_passes
+        description: "{{ doc('table_boarding_passes') }}"
+        columns:
+          - name: ticket_no
+            description: "Номер билета"
+          - name: flight_id
+            description: "Идентификатор рейса"
+          - name: boarding_no
+            description: "Номер посадочного талона"
+          - name: seat_no
+            description: " Номер места"
+      - name: flights
+        description: "{{ doc('table_flights') }}"
+        columns:
+          - name: flight_id
+            description: "Идентификатор рейса"
+          - name: flight_no
+            description: "Номер маршрута"
+          - name: scheduled_departure
+            description: "Время вылета по расписанию"
+          - name: scheduled_arrival
+            description: "Время прилёта по расписанию"
+          - name: departure_airport
+            description: "Аэропорт отправления"
+          - name: arrival_airport
+            description: "Аэропорт прилёта"
+          - name: status
+            description: "Статус рейса"
+          - name: aircraft_code
+            description: "Трёхзначный IATA‑код модели воздушного судна."
+          - name: actual_departure
+            description: "Фактическое время вылета"
+          - name: actual_arrival
+            description: "Фактическое время прилёта"
+        config: 
+          freshness:
+            warn_after:
+              count: 1 
+              period: day 
+            error_after: 
+              count: 3 
+              period: day 
+            loaded_at_field: actual_departure
+            filter: "actual_departure > current_date - interval '2 days'"
+      - name: ticket_flights
+        description: "{{ doc('ticket_flights') }}"
+        columns: 
+          - name: ticket_no
+            description: "Номер билета"
+          - name: flight_id
+            description: "Идентификатор рейса"
+          - name: fare_conditions
+            description: "Класс обслуживания"
+          - name: amount
+            description: "Стоимость перелета"
+      - name: tickets
+        description: "{{ doc('tickets') }}"
+        columns:
+          - name: ticket_no
+            description: "Номер билета"
+          - name: book_ref
+            description: "Номер бронирования"
+          - name: passenger_id
+            description: "Номер документа"
+          - name: passenger_name
+            description: "Полное имя пассажира"
+          - name: contact_data
+            description: "Контактная информация"
