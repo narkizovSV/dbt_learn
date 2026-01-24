@@ -1,0 +1,43 @@
+version: 2
+
+models:
+  - name: fct_ticket_flights
+    description: Факты выдачи посадочных талонов
+    config:
+      materialized: table
+      docs:
+        show: true
+        node_color: green
+      contract:
+        enforced: true
+    meta:
+      owner: "hellomzf@gmail.com"
+    columns:
+      - name: ticket_no
+        description: Номер билета
+        data_type: bpchar(13)
+        constraints:
+          - type: not_null
+      - name: flight_id
+        description: ID полёта
+        data_type: int4
+      - name: fare_conditions
+        description: Условия тарифа
+        data_type: varchar(10)
+      - name: amount
+        description: Сумма
+        data_type: numeric(10, 2)
+      - name: boarding_pass_exists
+        description: Существует ли посадочный талон
+        data_type: text
+      - name: boarding_no
+        description: Номер посадочного талона
+        data_type: int4
+      - name: seat_no
+        description: Номер места
+        data_type: varchar(4)
+      - name: load_date
+        description: Дата загрузки
+        data_type: date
+        constraints:
+          - type: not_null
