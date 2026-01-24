@@ -6,6 +6,15 @@ sources:
     database: dwh_flight
     description: Домашняя работа
     tables:
+      - name: bookings
+        description: "Bookings"
+        columns:
+          - name: book_ref
+            description: "Booking number"
+          - name: book_date 
+            description: "Booking date"
+          - name: total_amount
+            description: "Total booking cost"
       - name: boarding_passes
         description: "{{ doc('table_boarding_passes') }}"
         columns:
