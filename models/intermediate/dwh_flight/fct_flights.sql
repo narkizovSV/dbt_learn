@@ -1,6 +1,8 @@
 {{
     config(
-        materialized = 'table',
+        materialized = 'incremental',
+        incremental_strategy = 'merge',
+        unique_key = 'flight_id'
     )
 }}
 SELECT 
@@ -16,3 +18,7 @@ SELECT
     actual_arrival,
     current_date as load_date
 FROM {{ ref('stg_booking__flights') }}
+
+{% if is_incremental() %}
+    WHERE scheduled_departure >= (select max(scheduled_departure) - interval '100' day from {{ this }})
+{% endif %}
