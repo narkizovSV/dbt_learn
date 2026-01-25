@@ -83,3 +83,12 @@ sources:
             description: "Полное имя пассажира"
           - name: contact_data
             description: "Контактная информация"
+      - name: seats
+        description: "Места"
+        columns:
+          - name: aircraft_code
+            description: "Номер билета"
+          - name: seat_no
+            description: "Номер бронирования"
+          - name: fare_conditions
+            description: "Номер документа"
