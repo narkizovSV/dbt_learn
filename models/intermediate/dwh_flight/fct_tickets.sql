@@ -1,7 +1,7 @@
 {{
   config(
     materialized = 'table',
-    )
+  )
 }}
 SELECT 
     ticket_no, 
@@ -10,3 +10,4 @@ SELECT
     passenger_name, 
     contact_data
 FROM {{ ref('stg_booking__tickets') }}
+WHERE passenger_id NOT IN (SELECT passenger_id FROM {{ ref('exclude_employees') }})
